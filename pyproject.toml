@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agentstate"
+version = "0.1.0"
+description = "Git remembers the code. AgentState remembers why the project is the way it is."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "click>=8.1",
+    "mcp>=1.2,<2",
+]
+
+[project.optional-dependencies]
+postgres = ["psycopg[binary]>=3.1"]
+dev = ["pytest>=7.4"]
+
+[project.scripts]
+agentstate = "agentstate.cli:main"
+agentstate-mcp = "agentstate.mcp_server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"agentstate.db.migrations.sqlite" = ["*.sql"]
+"agentstate.db.migrations.postgres" = ["*.sql"]
